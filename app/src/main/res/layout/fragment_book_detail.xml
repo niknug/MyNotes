@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?attr/textAppearanceHeadline5"
+        tools:text="@string/book_title_label" />
+
+    <EditText
+        android:id="@+id/book_title_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/book_title_hint"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:textColorHint="#757575" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?attr/textAppearanceHeadline5"
+        tools:text="@string/book_publication_date_label" />
+
+    <Button
+        android:id="@+id/publication_date_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="01.02.1993" />
+
+    <CheckBox
+        android:id="@+id/book_read_check_box"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/book_read_label" />
+
+</LinearLayout>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/author_name_label"
+        android:textAppearance="?attr/textAppearanceHeadline5" />
+
+    <EditText
+        android:id="@+id/author_name_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/author_name_hint"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textColorHint="#757575" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/author_date_of_birth_label"
+        android:textAppearance="?attr/textAppearanceHeadline5" />
+
+    <EditText
+        android:id="@+id/date_of_birth_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/author_date_of_birth_hint"
+        android:importantForAutofill="no"
+        android:inputType="date"
+        android:minHeight="48dp"
+        android:textColorHint="#757575" />
+
+
+</LinearLayout>

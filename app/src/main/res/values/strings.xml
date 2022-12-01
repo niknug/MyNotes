@@ -1,3 +1,12 @@
 <resources>
-    <string name="app_name">MyNotes</string>
+    <string name="app_name">My Notes</string>
+    <string name="author_date_of_birth_hint">Enter a date of birth</string>
+    <string name="author_date_of_birth_label">Date of Birth</string>
+    <string name="author_name_hint">Enter an author name</string>
+    <string name="author_name_label">Author Name</string>
+    <string name="book_publication_date_label">Publication Date</string>
+    <string name="book_read_label">Read</string>
+    <string name="book_summary_label">Summary</string>
+    <string name="book_title_hint">Enter a book title</string>
+    <string name="book_title_label">Book Title</string>
 </resources>
