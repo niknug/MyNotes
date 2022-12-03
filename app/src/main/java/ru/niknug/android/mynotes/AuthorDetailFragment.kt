@@ -13,7 +13,11 @@ import java.util.*
 
 class AuthorDetailFragment : Fragment() {
 
-    private lateinit var binding: FragmentAuthorDetailBinding
+    private var _binding: FragmentAuthorDetailBinding? = null
+    private val binding
+        get() = checkNotNull(_binding) {
+            "Cannot access binding because it is null. Is the view visible?"
+        }
     private lateinit var author: Author
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +35,7 @@ class AuthorDetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentAuthorDetailBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentAuthorDetailBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -56,5 +60,10 @@ class AuthorDetailFragment : Fragment() {
                 setText(date)
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
