@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_container"
-    android:name="ru.niknug.android.mynotes.AuthorDetailFragment"
+    android:name="ru.niknug.android.mynotes.AuthorListFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity" />
