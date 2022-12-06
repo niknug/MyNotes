@@ -35,6 +35,10 @@ class AuthorListFragment : Fragment() {
         _binding = FragmentAuthorListBinding.inflate(inflater, container, false)
         binding.authorRecyclerView.layoutManager = LinearLayoutManager(context)
 
+        val authors = authorListViewModel.authors
+        val adapter = AuthorListAdapter(authors)
+        binding.authorRecyclerView.adapter = adapter
+
         return binding.root
     }
 
