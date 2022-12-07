@@ -14,10 +14,7 @@ class AuthorListAdapter(private val authors: List<Author>) : RecyclerView.Adapte
 
     override fun onBindViewHolder(holder: AuthorHolder, position: Int) {
         val author = authors[position]
-        holder.apply {
-            binding.authorNameTextView.text = author.name
-            binding.authorImageView.setImageResource(R.mipmap.dostoevsky)
-        }
+        holder.bind(author)
     }
 
     override fun getItemCount() = authors.size
