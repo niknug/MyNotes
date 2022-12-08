@@ -8,6 +8,7 @@ class AuthorHolder(val binding: ListItemAuthorBinding) : RecyclerView.ViewHolder
     fun bind(author: Author) {
         binding.authorNameTextView.text = author.name
         binding.authorImageView.setImageResource(R.mipmap.dostoevsky)
+        binding.authorYearsTextView.text = "${author.dateOfBirth.toString("dd.MM.yyyy")} - ${author.dateOfDeath.toString("dd.MM.yyyy")}"
 
         binding.root.setOnClickListener {
             Toast.makeText(binding.root.context, "${author.name} clicked!", Toast.LENGTH_LONG).show()
