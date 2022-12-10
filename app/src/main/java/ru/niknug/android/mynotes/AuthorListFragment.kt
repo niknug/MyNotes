@@ -7,7 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.coroutines.launch
 import ru.niknug.android.mynotes.databinding.FragmentAuthorListBinding
 
 private const val TAG = "AuthorListFragment"
@@ -27,6 +31,17 @@ class AuthorListFragment : Fragment() {
         Log.d(TAG, "Total authors: ${authorListViewModel.authors.size}")
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                val authors = authorListViewModel.loadAuthors()
+                binding.authorRecyclerView.adapter = AuthorListAdapter(authors)
+            }
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -34,10 +49,6 @@ class AuthorListFragment : Fragment() {
     ): View? {
         _binding = FragmentAuthorListBinding.inflate(inflater, container, false)
         binding.authorRecyclerView.layoutManager = LinearLayoutManager(context)
-
-        val authors = authorListViewModel.authors
-        val adapter = AuthorListAdapter(authors)
-        binding.authorRecyclerView.adapter = adapter
 
         return binding.root
     }
