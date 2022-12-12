@@ -1,6 +1,9 @@
 package ru.niknug.android.mynotes
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.util.*
 import org.joda.time.DateTime
 
-data class Author(val id: UUID, val name: String, val dateOfBirth: DateTime, val dateOfDeath: DateTime)
+@Entity
+data class Author(@PrimaryKey val id: UUID, val name: String, val dateOfBirth: DateTime, val dateOfDeath: DateTime)
