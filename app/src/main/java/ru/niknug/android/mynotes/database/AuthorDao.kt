@@ -9,7 +9,7 @@ import java.util.UUID
 interface AuthorDao {
 
     @Query("SELECT * FROM author")
-    suspend fun getAllAuthors(): List<Author>
+    suspend fun getAuthors(): List<Author>
 
     @Query("SELECT * FROM author WHERE id=(:id)")
     suspend fun getAuthor(id: UUID): Author

@@ -9,7 +9,7 @@ import java.util.*
 interface BookDao {
 
     @Query("SELECT * FROM book")
-    suspend fun getAllBooks(): List<Book>
+    suspend fun getBooks(): List<Book>
 
     @Query("SELECT * FROM book WHERE id=(:id)")
     suspend fun getBook(id: UUID): Book
