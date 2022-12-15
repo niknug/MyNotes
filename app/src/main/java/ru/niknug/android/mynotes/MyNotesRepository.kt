@@ -2,6 +2,7 @@ package ru.niknug.android.mynotes
 
 import android.content.Context
 import androidx.room.Room
+import kotlinx.coroutines.flow.Flow
 import ru.niknug.android.mynotes.database.MyNotesDatabase
 import java.util.UUID
 
@@ -17,7 +18,7 @@ class MyNotesRepository private constructor(context: Context) {
         )
         .build()
 
-    suspend fun getAuthors(): List<Author> = database.authorDao().getAuthors()
+    fun getAuthors(): Flow<List<Author>> = database.authorDao().getAuthors()
 
     suspend fun getAuthor(id: UUID): Author = database.authorDao().getAuthor(id)
 

@@ -26,18 +26,14 @@ class AuthorListFragment : Fragment() {
 
     private val authorListViewModel: AuthorListViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Log.d(TAG, "Total authors: ${authorListViewModel.authors.size}")
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                val authors = authorListViewModel.loadAuthors()
-                binding.authorRecyclerView.adapter = AuthorListAdapter(authors)
+                authorListViewModel.authors.collect { authors ->
+                    binding.authorRecyclerView.adapter = AuthorListAdapter(authors)
+                }
             }
         }
     }
