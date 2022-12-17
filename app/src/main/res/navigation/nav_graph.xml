@@ -9,5 +9,14 @@
         android:id="@+id/authorListFragment"
         android:name="ru.niknug.android.mynotes.AuthorListFragment"
         android:label="AuthorListFragment"
-        tools:layout="@layout/fragment_author_list"/>
+        tools:layout="@layout/fragment_author_list">
+        <action
+            android:id="@+id/show_author_detail_action"
+            app:destination="@id/authorDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/authorDetailFragment"
+        android:name="ru.niknug.android.mynotes.AuthorDetailFragment"
+        android:label="AuthorDetailFragment"
+        tools:layout="@layout/fragment_author_detail"/>
 </navigation>

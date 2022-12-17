@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.launch
 import ru.niknug.android.mynotes.databinding.FragmentAuthorListBinding
@@ -32,7 +33,9 @@ class AuthorListFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 authorListViewModel.authors.collect { authors ->
-                    binding.authorRecyclerView.adapter = AuthorListAdapter(authors)
+                    binding.authorRecyclerView.adapter = AuthorListAdapter(authors) {
+                        findNavController().navigate(R.id.show_author_detail_action)
+                    }
                 }
             }
         }
