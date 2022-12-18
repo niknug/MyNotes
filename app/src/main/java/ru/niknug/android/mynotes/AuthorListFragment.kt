@@ -33,8 +33,10 @@ class AuthorListFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 authorListViewModel.authors.collect { authors ->
-                    binding.authorRecyclerView.adapter = AuthorListAdapter(authors) {
-                        findNavController().navigate(R.id.show_author_detail_action)
+                    binding.authorRecyclerView.adapter = AuthorListAdapter(authors) { authorId ->
+                        findNavController().navigate(
+                            AuthorListFragmentDirections.showAuthorDetail(authorId)
+                        )
                     }
                 }
             }

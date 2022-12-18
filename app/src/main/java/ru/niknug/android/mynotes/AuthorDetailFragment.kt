@@ -1,15 +1,19 @@
 package ru.niknug.android.mynotes
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import org.joda.time.DateTime
 import ru.niknug.android.mynotes.databinding.FragmentAuthorDetailBinding
 import java.time.LocalDate
 import java.util.*
+
+private const val TAG = "AuthorDetailFragment"
 
 class AuthorDetailFragment : Fragment() {
 
@@ -20,6 +24,8 @@ class AuthorDetailFragment : Fragment() {
         }
     private lateinit var author: Author
 
+    private val args: AuthorDetailFragmentArgs by navArgs()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -28,6 +34,8 @@ class AuthorDetailFragment : Fragment() {
             name = "Dostoevsky",
             dateOfBirth = DateTime().withDate(1821, 11, 11) ?: DateTime(),
             dateOfDeath = DateTime().withDate(1881, 2, 9))
+
+        Log.d(TAG, "The crime ID is: ${args.authorId}")
     }
 
     override fun onCreateView(

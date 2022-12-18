@@ -11,12 +11,16 @@
         android:label="AuthorListFragment"
         tools:layout="@layout/fragment_author_list">
         <action
-            android:id="@+id/show_author_detail_action"
+            android:id="@+id/show_author_detail"
             app:destination="@id/authorDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/authorDetailFragment"
         android:name="ru.niknug.android.mynotes.AuthorDetailFragment"
         android:label="AuthorDetailFragment"
-        tools:layout="@layout/fragment_author_detail"/>
+        tools:layout="@layout/fragment_author_detail">
+        <argument
+            android:name="authorId"
+            app:argType="java.util.UUID" />
+    </fragment>
 </navigation>
