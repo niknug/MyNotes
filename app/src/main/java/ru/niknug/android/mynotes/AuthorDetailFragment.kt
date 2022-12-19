@@ -7,13 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
+import kotlinx.coroutines.launch
 import org.joda.time.DateTime
 import ru.niknug.android.mynotes.databinding.FragmentAuthorDetailBinding
 import java.time.LocalDate
 import java.util.*
-
-private const val TAG = "AuthorDetailFragment"
 
 class AuthorDetailFragment : Fragment() {
 
@@ -22,20 +25,11 @@ class AuthorDetailFragment : Fragment() {
         get() = checkNotNull(_binding) {
             "Cannot access binding because it is null. Is the view visible?"
         }
-    private lateinit var author: Author
 
     private val args: AuthorDetailFragmentArgs by navArgs()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        author = Author(
-            id = UUID.randomUUID(),
-            name = "Dostoevsky",
-            dateOfBirth = DateTime().withDate(1821, 11, 11) ?: DateTime(),
-            dateOfDeath = DateTime().withDate(1881, 2, 9))
-
-        Log.d(TAG, "The crime ID is: ${args.authorId}")
+    private val authorDetailViewModel: AuthorDetailViewModel by viewModels {
+        AuthorDetailViewModelFactory(args.authorId)
     }
 
     override fun onCreateView(
@@ -52,21 +46,32 @@ class AuthorDetailFragment : Fragment() {
 
         binding.apply {
 
-
-
-            authorNameEditText.apply {
-                val name: CharSequence = author.name
-                setText(name)
-            }.doOnTextChanged { text, _, _, _ ->
-                author = author.copy(name = text.toString())
+            authorNameEditText.doOnTextChanged { text, _, _, _ ->
+                authorDetailViewModel.updateAuthor { oldAuthor ->
+                    oldAuthor.copy(name = text.toString())
+                }
             }
-
-
 
             dateOfBirthEditText.apply {
-                val date: CharSequence = author.dateOfBirth.toString("dd.MM.yyyy")
-                setText(date)
+
             }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                authorDetailViewModel.author.collect { author ->
+                    author?.let { updateUi(it) }
+                }
+            }
+        }
+    }
+
+    private fun updateUi(author: Author) {
+        binding.apply {
+            if (authorNameEditText.text.toString() != author.name) {
+                authorNameEditText.setText(author.name)
+            }
+            dateOfBirthEditText.setText(author.dateOfBirth.toString())
         }
     }
 
