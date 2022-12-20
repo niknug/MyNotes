@@ -26,6 +26,12 @@ class AuthorDetailViewModel(authorId: UUID) : ViewModel() {
             oldAuthor?.let { onUpdate(it) }
         }
     }
+
+    override fun onCleared() {
+        super.onCleared()
+
+        author.value?.let { myNotesRepository.updateAuthor(it) }
+    }
 }
 
 class AuthorDetailViewModelFactory(private val authorId: UUID) : ViewModelProvider.Factory {
