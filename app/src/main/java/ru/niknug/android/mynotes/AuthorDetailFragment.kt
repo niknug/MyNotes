@@ -5,6 +5,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -30,6 +32,22 @@ class AuthorDetailFragment : Fragment() {
 
     private val authorDetailViewModel: AuthorDetailViewModel by viewModels {
         AuthorDetailViewModelFactory(args.authorId)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
+
+            if (binding.authorNameEditText.toString().isBlank())
+            {
+                isEnabled = true
+                Toast.makeText(context, R.string.author_name_is_blank, Toast.LENGTH_LONG).show()
+            } else
+            {
+                isEnabled = false
+            }
+        }
     }
 
     override fun onCreateView(
