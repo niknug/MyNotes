@@ -11,4 +11,5 @@
     <string name="book_title_label">Book Title</string>
     <string name="author_photo">Author photo</string>
     <string name="author_name_is_blank">Enter author name</string>
+    <string name="new_author">New Author</string>
 </resources>
