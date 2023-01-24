@@ -1,6 +1,7 @@
 package ru.niknug.android.mynotes.database
 
 import androidx.room.Dao
+import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
@@ -18,4 +19,7 @@ interface AuthorDao {
 
     @Update
     suspend fun updateAuthor(author: Author)
+
+    @Insert
+    suspend fun addAuthor(author: Author)
 }

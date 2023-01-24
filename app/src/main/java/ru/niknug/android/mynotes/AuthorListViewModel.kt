@@ -28,4 +28,8 @@ class AuthorListViewModel : ViewModel() {
             }
         }
     }
+
+    suspend fun addAuthor(author: Author) {
+        myNotesRepository.addAuthor(author)
+    }
 }

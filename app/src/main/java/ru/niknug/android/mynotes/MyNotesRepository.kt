@@ -33,6 +33,10 @@ class MyNotesRepository private constructor(context: Context) {
         }
     }
 
+    suspend fun addAuthor(author: Author) {
+        database.authorDao().addAuthor(author)
+    }
+
     companion object {
         private var INSTANCE: MyNotesRepository? = null
 

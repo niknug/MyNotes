@@ -13,7 +13,9 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.launch
+import org.joda.time.DateTime
 import ru.niknug.android.mynotes.databinding.FragmentAuthorListBinding
+import java.util.*
 
 private const val TAG = "AuthorListFragment"
 
@@ -37,7 +39,14 @@ class AuthorListFragment : Fragment() {
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                return false
+                return when (menuItem.itemId) {
+                    R.id.new_author ->
+                    {
+                        showNewAuthor()
+                        true
+                    }
+                    else -> false
+                }
             }
 
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
@@ -69,6 +78,20 @@ class AuthorListFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun showNewAuthor() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            val newAuthor = Author(id = UUID.randomUUID(),
+                name = "",
+                dateOfBirth = DateTime(),
+                dateOfDeath = DateTime()
+            )
+            authorListViewModel.addAuthor(newAuthor)
+            findNavController().navigate(
+                AuthorListFragmentDirections.showAuthorDetail(newAuthor.id)
+            )
+        }
     }
 
 }
